@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Dog implements Serializable {
     private String name;
     private int age;
+    //serialVersionUID 序列化的版本号，可以提高兼容性
+    private static final long serialVersionUID = 1l;
 
     @Override
     public String toString() {
