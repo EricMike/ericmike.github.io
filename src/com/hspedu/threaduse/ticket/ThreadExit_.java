@@ -1,4 +1,4 @@
-package com.hspedu.file.ticket;
+package com.hspedu.threaduse.ticket;
 
 public class ThreadExit_ {
     public static void main(String[] args) throws InterruptedException {
