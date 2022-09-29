@@ -28,8 +28,21 @@ class SellTicket03 implements Runnable{
     private boolean loop = true;//控制run方法的变量
     Object object = new Object();
 
+    //同步方法（静态的）的锁为当前类本身
+    //1. public synchronized static void m1(){} 锁是加在SellTicket03.class上
+    public synchronized static void m1(){
+
+    }
+    public static void m2(){
+        synchronized (SellTicket03.class){
+            System.out.println("m2");
+        }
+
+    }
+
+
     public void sell(){//同步方法,在同一时刻，只能有一个线程来执行run方法
-        synchronized (this) {
+        synchronized (/*this*/object) {
             if (ticketNum <= 0) {
                 System.out.println("售票结束...");
                 loop = false;
@@ -93,9 +106,9 @@ class SellTicket02 implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
 
-            if (ticketNum<=0){
+            if (ticketNum <= 0) {
                 System.out.println("售票结束...");
                 break;
             }
@@ -107,10 +120,8 @@ class SellTicket02 implements Runnable{
                 e.printStackTrace();
             }
 
-            System.out.println("窗口 "+Thread.currentThread().getName()+" 售出一张票"
-                    +" 剩余票数="+(--ticketNum));
-
-
+            System.out.println("窗口 " + Thread.currentThread().getName() + " 售出一张票"
+                    + " 剩余票数=" + (--ticketNum));
         }
     }
 }
